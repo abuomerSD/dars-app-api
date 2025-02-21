@@ -1,0 +1,25 @@
+{
+  "name": "dars-app-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "run:dev": "nodemon ./dist/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abuomerSD/dars-app-api.git"
+  },
+  "author": "Eltayeb Ibrahim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abuomerSD/dars-app-api/issues"
+  },
+  "homepage": "https://github.com/abuomerSD/dars-app-api#readme",
+  "dependencies": {
+    "@types/express": "^5.0.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "nodemon": "^3.1.9"
+  }
+}
