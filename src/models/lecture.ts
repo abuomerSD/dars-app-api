@@ -8,7 +8,7 @@ const lectureSchema = new Schema({
     title: String,
     lecturer: String,
     date: Schema.Types.Date,
-    location,
+    location: String,
     image: String,
     description: String,
-})
+});
