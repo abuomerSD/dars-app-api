@@ -18,7 +18,8 @@ app.use(logRequestMethodAndUrl);
 connectDb();
 
 // lecture routes
-app.use('/lecture', lectureRouter);
+const apiVersion = process.env.API_VERSION;
+app.use(`/api/v${apiVersion}/lectures`, lectureRouter);
 
 app.listen(port, ()=> {
     console.log(`Server is Listening on port: ${port}`);

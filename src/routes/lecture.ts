@@ -4,4 +4,4 @@ import { Lecture } from '../types/lecture';
 import { findAll, save } from '../controllers/lecture';
 export const router = express.Router();
 
-router.get('/', findAll);
+router.route('/').get(findAll).post(save);
