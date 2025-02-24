@@ -16,11 +16,18 @@ export const saveLecture =  async (l: Lecture) => {
 
 export const updateLecture = asyncWrapper( async () => {
     
-})
+});
 
-export const deleteLecture = asyncWrapper( async () => {
-    
-})
+// delete lecture
+export const deleteLectureById = async (id: String) => {
+    try {
+        const deleted = await lecture.findOneAndDelete(id);
+        // console.log(deleted);
+        return deleted;
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 // find by id
 export const findLectureById = async (id: String) => {

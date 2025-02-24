@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { asyncWrapper } from "../utils/asyncwrapper";
 import { Lecture } from "../types/lecture";
-import { findAllLectures, findLectureById, findLectureByLecturerName, saveLecture } from '../services/lecture';
+import { deleteLectureById, findAllLectures, findLectureById, findLectureByLecturerName, saveLecture } from '../services/lecture';
 import { SUCCESS_MESSAGE } from "../utils/responseStatusMessages";
 
 // save lecture to database
@@ -27,7 +27,7 @@ export const findAll = asyncWrapper(async (req:Request, res:Response, next: Next
 export const findById = asyncWrapper(async (req:Request, res: Response) => {
     const { id } = req.params; 
     const lec = await findLectureById(id);
-    res.json({
+    res.status(200).json({
         status: SUCCESS_MESSAGE,
         data: lec
     });
@@ -37,8 +37,18 @@ export const findById = asyncWrapper(async (req:Request, res: Response) => {
 export const findByLecturerName = asyncWrapper(async (req:Request, res: Response) => {
     const { lecturerName } = req.params;
     const lectures = await findLectureByLecturerName(lecturerName);
-    res.json({
+    res.status(200).json({
         status: SUCCESS_MESSAGE,
         data: lectures,
-    })
-})
+    });
+});
+
+// delete By Id 
+export const deleteById = asyncWrapper(async (req:Request, res: Response) => {
+    const { id } = req.params;
+    const deleted = await deleteLectureById(id);
+    res.status(200).json({
+        status: SUCCESS_MESSAGE,
+        data: deleted,
+    });
+});
