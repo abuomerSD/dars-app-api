@@ -1,7 +1,7 @@
 export interface Lecture {
     title: String,
     lecturer: String,
-    date: Date,
+    date: String,
     location: String,
     image: String,
     description: String,

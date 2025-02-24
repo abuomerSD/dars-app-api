@@ -3,6 +3,7 @@ import 'dotenv/config'
 import { logRequestMethodAndUrl } from './middlewares/logger'
 import { connectDb } from './database/connection' ;
 import { router as lectureRouter } from './routes/lecture';
+import { errorHandler } from './middlewares/errorHandler';
 
 const app: Express = express();
 
@@ -10,6 +11,9 @@ const port = process.env.PORT || 3000;
 
 // json parser
 app.use(express.json());
+
+// error handler middleware
+app.use(errorHandler);
 
 // log request method and url
 app.use(logRequestMethodAndUrl);

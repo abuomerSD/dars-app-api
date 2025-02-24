@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { asyncWrapper } from "../utils/asyncwrapper";
 import { Lecture } from "../types/lecture";
-import { findAllLectures, saveLecture } from '../services/lecture';
+import { findAllLectures, findLectureById, saveLecture } from '../services/lecture';
 import { SUCCESS_MESSAGE } from "../utils/responseStatusMessages";
 
 // save lecture to database
@@ -22,4 +22,14 @@ export const findAll = asyncWrapper(async (req:Request, res:Response, next: Next
         status: SUCCESS_MESSAGE,
         data: lectures
     })
+});
+
+// find lecture by id
+export const findById = asyncWrapper(async (req:Request, res: Response) => {
+    const { id } = req.params; 
+    const lec = await findLectureById(id);
+    res.json({
+        status: SUCCESS_MESSAGE,
+        data: lec
+    });
 });
