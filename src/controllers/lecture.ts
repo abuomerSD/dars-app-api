@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { asyncWrapper } from "../utils/asyncwrapper";
 import { Lecture } from "../types/lecture";
-import { deleteLectureById, findAllLectures, findLectureById, findLectureByLecturerName, saveLecture } from '../services/lecture';
+import { deleteLectureById, findAllLectures, findLectureById, findLectureByLecturerName, saveLecture, updateLectureById } from '../services/lecture';
 import { SUCCESS_MESSAGE } from "../utils/responseStatusMessages";
 
 // save lecture to database
@@ -50,5 +50,17 @@ export const deleteById = asyncWrapper(async (req:Request, res: Response) => {
     res.status(200).json({
         status: SUCCESS_MESSAGE,
         data: deleted,
+    });
+});
+
+// update By Id
+export const updateById = asyncWrapper(async (req:Request, res:Response) => {
+    const { id } = req.params;
+    const oldLecture = await findLectureById(id);
+    const newLecture: Lecture = req.body;
+    const updated = await updateLectureById(id, newLecture);
+    res.status(200).json({
+        status: SUCCESS_MESSAGE,
+        data: updated,
     });
 });

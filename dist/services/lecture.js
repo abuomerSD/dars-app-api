@@ -9,9 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.findLectureByLecturerName = exports.findAllLectures = exports.findLectureById = exports.deleteLectureById = exports.updateLecture = exports.saveLecture = void 0;
+exports.findLectureByLecturerName = exports.findAllLectures = exports.findLectureById = exports.deleteLectureById = exports.updateLectureById = exports.saveLecture = void 0;
 const lecture_1 = require("../models/lecture");
-const asyncwrapper_1 = require("../utils/asyncwrapper");
 // save lecture to database
 const saveLecture = (l) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -24,8 +23,17 @@ const saveLecture = (l) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.saveLecture = saveLecture;
-exports.updateLecture = (0, asyncwrapper_1.asyncWrapper)(() => __awaiter(void 0, void 0, void 0, function* () {
-}));
+// update By Id
+const updateLectureById = (id, newLecture) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const updated = yield lecture_1.lecture.findOneAndUpdate({ _id: id }, newLecture);
+        return updated;
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+exports.updateLectureById = updateLectureById;
 // delete lecture
 const deleteLectureById = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {

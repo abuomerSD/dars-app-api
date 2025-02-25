@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteById = exports.findByLecturerName = exports.findById = exports.findAll = exports.save = void 0;
+exports.updateById = exports.deleteById = exports.findByLecturerName = exports.findById = exports.findAll = exports.save = void 0;
 const asyncwrapper_1 = require("../utils/asyncwrapper");
 const lecture_1 = require("../services/lecture");
 const responseStatusMessages_1 = require("../utils/responseStatusMessages");
@@ -55,5 +55,16 @@ exports.deleteById = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(vo
     res.status(200).json({
         status: responseStatusMessages_1.SUCCESS_MESSAGE,
         data: deleted,
+    });
+}));
+// update By Id
+exports.updateById = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const oldLecture = yield (0, lecture_1.findLectureById)(id);
+    const newLecture = req.body;
+    const updated = yield (0, lecture_1.updateLectureById)(id, newLecture);
+    res.status(200).json({
+        status: responseStatusMessages_1.SUCCESS_MESSAGE,
+        data: updated,
     });
 }));

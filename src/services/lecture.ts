@@ -14,9 +14,15 @@ export const saveLecture =  async (l: Lecture) => {
     }    
 }
 
-export const updateLecture = asyncWrapper( async () => {
-    
-});
+// update By Id
+export const updateLectureById = async (id: String, newLecture: Lecture) => {
+    try {
+        const updated = await lecture.findOneAndUpdate({_id: id}, newLecture);
+        return updated;
+    } catch (error) {
+        console.log(error);
+    }   
+}
 
 // delete lecture
 export const deleteLectureById = async (id: String) => {
