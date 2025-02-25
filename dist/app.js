@@ -8,6 +8,7 @@ require("dotenv/config");
 const logger_1 = require("./middlewares/logger");
 const connection_1 = require("./database/connection");
 const lecture_1 = require("./routes/lecture");
+const lecturer_1 = require("./routes/lecturer");
 const errorHandler_1 = require("./middlewares/errorHandler");
 const app = (0, express_1.default)();
 const port = process.env.PORT || 3000;
@@ -22,6 +23,8 @@ app.use(logger_1.logRequestMethodAndUrl);
 // lecture routes
 const apiVersion = process.env.API_VERSION;
 app.use(`/api/v${apiVersion}/lectures`, lecture_1.router);
+// lecturer routes
+app.use(`/api/v${apiVersion}/lecturers`, lecturer_1.router);
 app.listen(port, () => {
     console.log(`Server is Listening on port: ${port}`);
 });

@@ -1,5 +1,4 @@
 import { lecture } from "../models/lecture";
-import { asyncWrapper } from "../utils/asyncwrapper";
 import { Lecture } from "../types/lecture";
 
 // save lecture to database
