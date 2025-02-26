@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.saveLecturer = exports.findLecturerById = exports.findAllLecturers = void 0;
+exports.deleteLectureById = exports.saveLecturer = exports.findLecturerById = exports.findAllLecturers = void 0;
 const lecturer_1 = require("../models/lecturer");
 const findAllLecturers = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -41,3 +41,13 @@ const saveLecturer = (lec) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.saveLecturer = saveLecturer;
+const deleteLectureById = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const deleted = yield lecturer_1.lecturer.findByIdAndDelete(id);
+        return deleted;
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+exports.deleteLectureById = deleteLectureById;

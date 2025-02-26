@@ -8,4 +8,4 @@ const express_1 = __importDefault(require("express"));
 const lecturer_1 = require("../controllers/lecturer");
 exports.router = express_1.default.Router();
 exports.router.route('/').get(lecturer_1.findAll).post(lecturer_1.save);
-exports.router.route('/:id').get(lecturer_1.findById);
+exports.router.route('/:id').get(lecturer_1.findById).delete(lecturer_1.deleteById);

@@ -27,3 +27,12 @@ export const saveLecturer = async (lec: Lecturer) => {
         console.log(error);
     }
 }
+
+export const deleteLectureById = async (id:String) => {
+    try {
+        const deleted = await lecturer.findByIdAndDelete(id);
+        return deleted;
+    } catch (error) {
+        console.log(error);
+    }
+}
