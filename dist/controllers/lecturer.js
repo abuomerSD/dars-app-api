@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.save = exports.findAll = void 0;
+exports.save = exports.findById = exports.findAll = void 0;
 const asyncwrapper_1 = require("../utils/asyncwrapper");
 const lecturer_1 = require("../services/lecturer");
 const responseStatusMessages_1 = require("../utils/responseStatusMessages");
@@ -18,6 +18,14 @@ exports.findAll = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(void 
     res.status(200).json({
         status: responseStatusMessages_1.SUCCESS_MESSAGE,
         data: lecturers
+    });
+}));
+exports.findById = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const lecturer = yield (0, lecturer_1.findLecturerById)(id);
+    res.status(200).json({
+        status: responseStatusMessages_1.SUCCESS_MESSAGE,
+        data: lecturer
     });
 }));
 exports.save = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(void 0, void 0, void 0, function* () {

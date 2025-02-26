@@ -10,6 +10,15 @@ export const findAllLecturers = async() => {
     }
 }
 
+export const findLecturerById = async(id: String) => {
+    try{
+        const lec = await lecturer.findById(id);
+        return lec;
+    } catch(error){
+        console.log(error);
+    }
+}
+
 export const saveLecturer = async (lec: Lecturer) => {
     try {
         const saved = await lecturer.create(lec);

@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.saveLecturer = exports.findAllLecturers = void 0;
+exports.saveLecturer = exports.findLecturerById = exports.findAllLecturers = void 0;
 const lecturer_1 = require("../models/lecturer");
 const findAllLecturers = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -21,6 +21,16 @@ const findAllLecturers = () => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.findAllLecturers = findAllLecturers;
+const findLecturerById = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const lec = yield lecturer_1.lecturer.findById(id);
+        return lec;
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+exports.findLecturerById = findLecturerById;
 const saveLecturer = (lec) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const saved = yield lecturer_1.lecturer.create(lec);
