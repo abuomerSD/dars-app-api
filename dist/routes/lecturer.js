@@ -5,5 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.router = void 0;
 const express_1 = __importDefault(require("express"));
+const lecturer_1 = require("../controllers/lecturer");
 exports.router = express_1.default.Router();
-exports.router.route('/').get(findAll);
+exports.router.route('/').get(lecturer_1.findAll).post(lecturer_1.save);

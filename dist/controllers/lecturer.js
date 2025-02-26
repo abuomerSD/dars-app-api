@@ -9,8 +9,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.findAll = void 0;
+exports.save = exports.findAll = void 0;
 const asyncwrapper_1 = require("../utils/asyncwrapper");
+const lecturer_1 = require("../services/lecturer");
+const responseStatusMessages_1 = require("../utils/responseStatusMessages");
 exports.findAll = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const lecturers = yield findAllLecturers();
+    const lecturers = yield (0, lecturer_1.findAllLecturers)();
+    res.status(200).json({
+        status: responseStatusMessages_1.SUCCESS_MESSAGE,
+        data: lecturers
+    });
+}));
+exports.save = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const lecturer = req.body;
+    const saved = yield (0, lecturer_1.saveLecturer)(lecturer);
+    res.status(201).json({
+        status: responseStatusMessages_1.SUCCESS_MESSAGE,
+        data: saved
+    });
 }));
