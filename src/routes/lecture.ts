@@ -6,4 +6,4 @@ router.route('/').get(findAll).post(save);
 
 router.route('/:id').get(findById).delete(deleteById).put(updateById);
 
-router.route('/:lecturerName').get(findByLecturerName);
+// router.route('/:lecturerName').get(findByLecturerName);

@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteLectureById = exports.saveLecturer = exports.findLecturerById = exports.findAllLecturers = void 0;
+exports.updateLecturerById = exports.findLecturerByName = exports.deleteLectureById = exports.saveLecturer = exports.findLecturerById = exports.findAllLecturers = void 0;
 const lecturer_1 = require("../models/lecturer");
 const findAllLecturers = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -51,3 +51,23 @@ const deleteLectureById = (id) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.deleteLectureById = deleteLectureById;
+const findLecturerByName = (name) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const lec = yield lecturer_1.lecturer.find({ name: { $regex: name } });
+        return lec;
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+exports.findLecturerByName = findLecturerByName;
+const updateLecturerById = (id, newLecturer) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const updated = yield lecturer_1.lecturer.findByIdAndUpdate({ _id: id }, newLecturer);
+        return updated;
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+exports.updateLecturerById = updateLecturerById;

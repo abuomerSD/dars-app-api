@@ -9,4 +9,4 @@ const lecture_1 = require("../controllers/lecture");
 exports.router = express_1.default.Router();
 exports.router.route('/').get(lecture_1.findAll).post(lecture_1.save);
 exports.router.route('/:id').get(lecture_1.findById).delete(lecture_1.deleteById).put(lecture_1.updateById);
-exports.router.route('/:lecturerName').get(lecture_1.findByLecturerName);
+// router.route('/:lecturerName').get(findByLecturerName);

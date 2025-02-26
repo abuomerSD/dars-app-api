@@ -36,3 +36,21 @@ export const deleteLectureById = async (id:String) => {
         console.log(error);
     }
 }
+
+export const findLecturerByName = async (name: String) => {
+    try {
+        const lec = await lecturer.find({name: {$regex : name}});
+        return lec;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const updateLecturerById = async (id: String, newLecturer: Lecturer) => {
+    try {
+        const updated = await lecturer.findByIdAndUpdate({_id: id}, newLecturer);
+        return updated;
+    } catch (error) {
+        console.log(error);
+    }
+}

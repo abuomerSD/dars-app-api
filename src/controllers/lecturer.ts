@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { asyncWrapper } from "../utils/asyncwrapper";
-import { findAllLecturers, findLecturerById, saveLecturer, deleteLectureById} from "../services/lecturer";
+import { updateLecturerById, findAllLecturers, findLecturerById, saveLecturer, deleteLectureById, findLecturerByName} from "../services/lecturer";
 import { Lecturer } from "../types/lecturer";
 import { SUCCESS_MESSAGE } from "../utils/responseStatusMessages";
 
@@ -36,5 +36,24 @@ export const deleteById = asyncWrapper(async(req:Request, res:Response) => {
     res.status(200).json({
         status: SUCCESS_MESSAGE,
         data: deleted
+    });
+});
+
+export const findByName = asyncWrapper(async (req:Request, res:Response) => {
+    const { lecturerName } = req.params;
+    const lecturer = await findLecturerByName(lecturerName);
+    res.status(200).json({
+        status: SUCCESS_MESSAGE,
+        data: lecturer
+    })
+});
+
+export const updateById = asyncWrapper(async (req:Request, res:Response) => {
+    const { id } = req.params;
+    const newLecturer: Lecturer = req.body;
+    const updated = await updateLecturerById(id, newLecturer);
+    res.status(200).json({
+        status: SUCCESS_MESSAGE,
+        data: updated
     });
 });
