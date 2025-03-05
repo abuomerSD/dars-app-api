@@ -23,6 +23,7 @@ export const findById = asyncWrapper(async(req:Request, res:Response) => {
 
 export const save = asyncWrapper(async (req:Request, res:Response) => {
     const lecturer: Lecturer = req.body;
+    lecturer.image = '/uploads/images/'+ req.file?.filename;
     const saved = await saveLecturer(lecturer);
     res.status(201).json({
         status:SUCCESS_MESSAGE,
@@ -51,6 +52,7 @@ export const findByName = asyncWrapper(async (req:Request, res:Response) => {
 export const updateById = asyncWrapper(async (req:Request, res:Response) => {
     const { id } = req.params;
     const newLecturer: Lecturer = req.body;
+    newLecturer.image = '/uploads/images/'+ req.file?.filename;
     const updated = await updateLecturerById(id, newLecturer);
     res.status(200).json({
         status: SUCCESS_MESSAGE,

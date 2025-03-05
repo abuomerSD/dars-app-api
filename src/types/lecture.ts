@@ -3,6 +3,6 @@ export interface Lecture {
     lecturer: String,
     date: String,
     location: String,
-    image: String,
+    image: String | undefined,
     description: String,
 }

@@ -29,7 +29,9 @@ exports.findById = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(void
     });
 }));
 exports.save = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     const lecturer = req.body;
+    lecturer.image = '/uploads/images/' + ((_a = req.file) === null || _a === void 0 ? void 0 : _a.filename);
     const saved = yield (0, lecturer_1.saveLecturer)(lecturer);
     res.status(201).json({
         status: responseStatusMessages_1.SUCCESS_MESSAGE,
@@ -53,8 +55,10 @@ exports.findByName = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(vo
     });
 }));
 exports.updateById = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _b;
     const { id } = req.params;
     const newLecturer = req.body;
+    newLecturer.image = '/uploads/images/' + ((_b = req.file) === null || _b === void 0 ? void 0 : _b.filename);
     const updated = yield (0, lecturer_1.updateLecturerById)(id, newLecturer);
     res.status(200).json({
         status: responseStatusMessages_1.SUCCESS_MESSAGE,

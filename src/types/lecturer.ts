@@ -1,5 +1,5 @@
 export interface Lecturer {
     name: String,
-    image: String,
+    image: String | undefined,
     nationality: String,
 }

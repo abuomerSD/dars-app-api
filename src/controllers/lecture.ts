@@ -7,6 +7,7 @@ import { SUCCESS_MESSAGE } from "../utils/responseStatusMessages";
 // save lecture to database
 export const save = asyncWrapper(async (req:Request, res:Response, next: NextFunction) => {
     const lecture: Lecture = req.body;
+    lecture.image = '/uploads/images/'+ req.file?.filename;
     const saved = await saveLecture(lecture);
     res.status(201).json({
         status: SUCCESS_MESSAGE,
@@ -58,6 +59,7 @@ export const updateById = asyncWrapper(async (req:Request, res:Response) => {
     const { id } = req.params;
     const oldLecture = await findLectureById(id);
     const newLecture: Lecture = req.body;
+    newLecture.image = '/uploads/images/'+ req.file?.filename;
     const updated = await updateLectureById(id, newLecture);
     res.status(200).json({
         status: SUCCESS_MESSAGE,
