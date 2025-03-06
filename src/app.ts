@@ -19,6 +19,9 @@ app.use(errorHandler);
 // log request method and url
 app.use(logRequestMethodAndUrl);
 
+// static files
+app.use(express.static('uploads'));
+
 // connect database
 connectDb();
 
