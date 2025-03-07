@@ -17,7 +17,7 @@ const responseStatusMessages_1 = require("../utils/responseStatusMessages");
 exports.save = (0, asyncwrapper_1.asyncWrapper)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     const lecture = req.body;
-    lecture.image = '/uploads/images/' + ((_a = req.file) === null || _a === void 0 ? void 0 : _a.filename);
+    lecture.image = '/images/' + ((_a = req.file) === null || _a === void 0 ? void 0 : _a.filename);
     const saved = yield (0, lecture_1.saveLecture)(lecture);
     res.status(201).json({
         status: responseStatusMessages_1.SUCCESS_MESSAGE,
@@ -65,7 +65,7 @@ exports.updateById = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(vo
     const { id } = req.params;
     const oldLecture = yield (0, lecture_1.findLectureById)(id);
     const newLecture = req.body;
-    newLecture.image = '/uploads/images/' + ((_b = req.file) === null || _b === void 0 ? void 0 : _b.filename);
+    newLecture.image = '/images/' + ((_b = req.file) === null || _b === void 0 ? void 0 : _b.filename);
     const updated = yield (0, lecture_1.updateLectureById)(id, newLecture);
     res.status(200).json({
         status: responseStatusMessages_1.SUCCESS_MESSAGE,
