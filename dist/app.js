@@ -18,6 +18,8 @@ app.use(express_1.default.json());
 app.use(errorHandler_1.errorHandler);
 // log request method and url
 app.use(logger_1.logRequestMethodAndUrl);
+// static files
+app.use(express_1.default.static('uploads'));
 // connect database
 (0, connection_1.connectDb)();
 // lecture routes
