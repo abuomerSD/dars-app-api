@@ -17,11 +17,22 @@ export const save = asyncWrapper(async (req:Request, res:Response, next: NextFun
 
 // returns all lectures as json
 export const findAll = asyncWrapper(async (req:Request, res:Response, next: NextFunction) => {
-    const lectures = await findAllLectures();
-    res.status(200).json({
-        status: SUCCESS_MESSAGE,
-        data: lectures
-    })
+    let lectures = await findAllLectures();
+    const name: any = req.query.name;
+    console.log(name);
+    if(name) {
+        lectures = await findLectureByLecturerName(name);
+        return res.status(200).json({
+            status: SUCCESS_MESSAGE,
+            data: lectures
+        });
+    } else {
+        res.status(200).json({
+            status: SUCCESS_MESSAGE,
+            data: lectures
+        });
+    }
+    
 });
 
 // find lecture by id
@@ -34,15 +45,6 @@ export const findById = asyncWrapper(async (req:Request, res: Response) => {
     });
 });
 
-// filter By Lecturer name
-export const findByLecturerName = asyncWrapper(async (req:Request, res: Response) => {
-    const { lecturerName } = req.params;
-    const lectures = await findLectureByLecturerName(lecturerName);
-    res.status(200).json({
-        status: SUCCESS_MESSAGE,
-        data: lectures,
-    });
-});
 
 // delete By Id 
 export const deleteById = asyncWrapper(async (req:Request, res: Response) => {

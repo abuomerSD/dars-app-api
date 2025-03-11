@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateById = exports.deleteById = exports.findByLecturerName = exports.findById = exports.findAll = exports.save = void 0;
+exports.updateById = exports.deleteById = exports.findById = exports.findAll = exports.save = void 0;
 const asyncwrapper_1 = require("../utils/asyncwrapper");
 const lecture_1 = require("../services/lecture");
 const responseStatusMessages_1 = require("../utils/responseStatusMessages");
@@ -26,11 +26,22 @@ exports.save = (0, asyncwrapper_1.asyncWrapper)((req, res, next) => __awaiter(vo
 }));
 // returns all lectures as json
 exports.findAll = (0, asyncwrapper_1.asyncWrapper)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const lectures = yield (0, lecture_1.findAllLectures)();
-    res.status(200).json({
-        status: responseStatusMessages_1.SUCCESS_MESSAGE,
-        data: lectures
-    });
+    let lectures = yield (0, lecture_1.findAllLectures)();
+    const name = req.query.name;
+    console.log(name);
+    if (name) {
+        lectures = yield (0, lecture_1.findLectureByLecturerName)(name);
+        return res.status(200).json({
+            status: responseStatusMessages_1.SUCCESS_MESSAGE,
+            data: lectures
+        });
+    }
+    else {
+        res.status(200).json({
+            status: responseStatusMessages_1.SUCCESS_MESSAGE,
+            data: lectures
+        });
+    }
 }));
 // find lecture by id
 exports.findById = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -39,15 +50,6 @@ exports.findById = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(void
     res.status(200).json({
         status: responseStatusMessages_1.SUCCESS_MESSAGE,
         data: lec
-    });
-}));
-// filter By Lecturer name
-exports.findByLecturerName = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { lecturerName } = req.params;
-    const lectures = yield (0, lecture_1.findLectureByLecturerName)(lecturerName);
-    res.status(200).json({
-        status: responseStatusMessages_1.SUCCESS_MESSAGE,
-        data: lectures,
     });
 }));
 // delete By Id 

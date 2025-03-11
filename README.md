@@ -4,3 +4,5 @@
 
 - admin auth
 - swagger 
+- pagenation
+- lecturer unique name

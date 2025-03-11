@@ -5,11 +5,21 @@ import { Lecturer } from "../types/lecturer";
 import { SUCCESS_MESSAGE } from "../utils/responseStatusMessages";
 
 export const findAll = asyncWrapper(async (req:Request, res:Response) => {
-    const lecturers = await findAllLecturers();
-    res.status(200).json({
-        status: SUCCESS_MESSAGE,
-        data: lecturers
-    });
+    let lecturers = await findAllLecturers();
+    const name: any = req.query.name;
+    if(name) {
+        lecturers = await findLecturerByName(name);
+        return res.status(200).json({
+            status: SUCCESS_MESSAGE,
+            data: lecturers
+        });
+    } else {
+        res.status(200).json({
+            status: SUCCESS_MESSAGE,
+            data: lecturers
+        });
+    }
+    
 });
 
 export const findById = asyncWrapper(async(req:Request, res:Response) => {
@@ -38,15 +48,6 @@ export const deleteById = asyncWrapper(async(req:Request, res:Response) => {
         status: SUCCESS_MESSAGE,
         data: deleted
     });
-});
-
-export const findByName = asyncWrapper(async (req:Request, res:Response) => {
-    const { lecturerName } = req.params;
-    const lecturer = await findLecturerByName(lecturerName);
-    res.status(200).json({
-        status: SUCCESS_MESSAGE,
-        data: lecturer
-    })
 });
 
 export const updateById = asyncWrapper(async (req:Request, res:Response) => {

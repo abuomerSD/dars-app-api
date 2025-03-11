@@ -9,16 +9,26 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateById = exports.findByName = exports.deleteById = exports.save = exports.findById = exports.findAll = void 0;
+exports.updateById = exports.deleteById = exports.save = exports.findById = exports.findAll = void 0;
 const asyncwrapper_1 = require("../utils/asyncwrapper");
 const lecturer_1 = require("../services/lecturer");
 const responseStatusMessages_1 = require("../utils/responseStatusMessages");
 exports.findAll = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const lecturers = yield (0, lecturer_1.findAllLecturers)();
-    res.status(200).json({
-        status: responseStatusMessages_1.SUCCESS_MESSAGE,
-        data: lecturers
-    });
+    let lecturers = yield (0, lecturer_1.findAllLecturers)();
+    const name = req.query.name;
+    if (name) {
+        lecturers = yield (0, lecturer_1.findLecturerByName)(name);
+        return res.status(200).json({
+            status: responseStatusMessages_1.SUCCESS_MESSAGE,
+            data: lecturers
+        });
+    }
+    else {
+        res.status(200).json({
+            status: responseStatusMessages_1.SUCCESS_MESSAGE,
+            data: lecturers
+        });
+    }
 }));
 exports.findById = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
@@ -44,14 +54,6 @@ exports.deleteById = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(vo
     res.status(200).json({
         status: responseStatusMessages_1.SUCCESS_MESSAGE,
         data: deleted
-    });
-}));
-exports.findByName = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { lecturerName } = req.params;
-    const lecturer = yield (0, lecturer_1.findLecturerByName)(lecturerName);
-    res.status(200).json({
-        status: responseStatusMessages_1.SUCCESS_MESSAGE,
-        data: lecturer
     });
 }));
 exports.updateById = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
