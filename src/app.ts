@@ -4,6 +4,7 @@ import { logRequestMethodAndUrl } from './middlewares/logger'
 import { connectDb } from './database/connection' ;
 import { router as lectureRouter } from './routes/lecture';
 import { router as lecturerRouter } from './routes/lecturer';
+import { router as usersRouter } from './routes/user';
 import { errorHandler } from './middlewares/errorHandler';
 
 const app: Express = express();
@@ -31,6 +32,9 @@ app.use(`/api/v${apiVersion}/lectures`, lectureRouter);
 
 // lecturer routes
 app.use(`/api/v${apiVersion}/lecturers`, lecturerRouter);
+
+// user routes
+app.use(`/api/v${apiVersion}/users`, usersRouter);
 
 app.listen(port, ()=> {
     console.log(`Server is Listening on port: ${port}`);
