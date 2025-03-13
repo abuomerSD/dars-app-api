@@ -7,10 +7,7 @@ const lectureSchema = new Schema({
         type: String,
         default: () => uuidv4(),
     },
-    title: {
-        type: String,
-        unique: true,
-    },
+    title: String,
     lecturer: String,
     date: String,
     location: String,

@@ -18,7 +18,10 @@ app.use(express.json());
 app.use(errorHandler);
 
 // log request method and url
-app.use(logRequestMethodAndUrl);
+if(process.env.NODE_ENV === 'development') {
+    app.use(logRequestMethodAndUrl);
+    console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
+}
 
 // static files
 app.use(express.static('uploads'));

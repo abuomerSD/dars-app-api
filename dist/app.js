@@ -18,7 +18,10 @@ app.use(express_1.default.json());
 // error handler middleware
 app.use(errorHandler_1.errorHandler);
 // log request method and url
-app.use(logger_1.logRequestMethodAndUrl);
+if (process.env.NODE_ENV === 'development') {
+    app.use(logger_1.logRequestMethodAndUrl);
+    console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
+}
 // static files
 app.use(express_1.default.static('uploads'));
 // connect database
