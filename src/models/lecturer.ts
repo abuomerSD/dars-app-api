@@ -7,9 +7,15 @@ const lecturerSchema = new Schema({
         type: String,
         default: () => uuidv4(),
     },
-    name: String,
+    name: {
+        type: String,
+        unique: true,
+    },
     image: String,
     nationality: String,
+},{
+    timestamps: true,
+    versionKey: false,
 });
 
 export const lecturer = mongoose.model("Lecturer", lecturerSchema);

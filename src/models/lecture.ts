@@ -7,12 +7,18 @@ const lectureSchema = new Schema({
         type: String,
         default: () => uuidv4(),
     },
-    title: String,
+    title: {
+        type: String,
+        unique: true,
+    },
     lecturer: String,
     date: String,
     location: String,
     image: String,
     description: String,
+}, {
+    timestamps: true,
+    versionKey: false,
 });
 
 export const lecture = mongoose.model('Lecture', lectureSchema);

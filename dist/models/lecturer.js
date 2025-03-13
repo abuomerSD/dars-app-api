@@ -12,8 +12,14 @@ const lecturerSchema = new Schema({
         type: String,
         default: () => (0, uuid_1.v4)(),
     },
-    name: String,
+    name: {
+        type: String,
+        unique: true,
+    },
     image: String,
     nationality: String,
+}, {
+    timestamps: true,
+    versionKey: false,
 });
 exports.lecturer = mongoose_1.default.model("Lecturer", lecturerSchema);

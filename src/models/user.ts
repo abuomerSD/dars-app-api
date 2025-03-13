@@ -7,9 +7,15 @@ const userSchema = new Schema({
         type: String,
         default: () => uuidv4(),
     },
-    username: String,
+    username: {
+        type: String,
+        unique: true
+    },
     password: String,
     isAdmin: String,
+},{
+    timestamps: true,
+    versionKey: false,
 });
 
 export const lecture = mongoose.model('User', userSchema);

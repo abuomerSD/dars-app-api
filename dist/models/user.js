@@ -12,8 +12,14 @@ const userSchema = new Schema({
         type: String,
         default: () => (0, uuid_1.v4)(),
     },
-    username: String,
+    username: {
+        type: String,
+        unique: true
+    },
     password: String,
     isAdmin: String,
+}, {
+    timestamps: true,
+    versionKey: false,
 });
 exports.lecture = mongoose_1.default.model('User', userSchema);
