@@ -14,6 +14,9 @@
 #### /api/v1/lectures?name={name}
 - GET: get lecture by name (filter by name)
 
+#### /api/v1/lectures?page={pageNumber}&limit={resultsPerPage}
+- GET: get lecture in paginated way.
+
 ## Lecturers End Points (المحاضر \ الشيخ):
 
 #### /api/v1/lecturers/
@@ -27,3 +30,6 @@
 
 #### /api/v1/lecturers?name={name}
 - GET: get lecturer by name (filter by name)
+
+#### /api/v1/lecturers?page={pageNumber}&limit={resultsPerPage}
+- GET: get lecturer in paginated way.

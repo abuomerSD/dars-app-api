@@ -5,5 +5,5 @@
 - user model
 - admin auth
 - swagger 
-- pagenation
 - lecturer unique name
+- delete image after delete document
