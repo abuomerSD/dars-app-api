@@ -12,10 +12,9 @@ const userSchema = new Schema({
         unique: true
     },
     password: String,
-    isAdmin: String,
 },{
     timestamps: true,
     versionKey: false,
 });
 
-export const lecture = mongoose.model('User', userSchema);
+export const userModel = mongoose.model('User', userSchema);
