@@ -1,9 +1,10 @@
 import { lecturer } from "../models/lecturer"
 import { Lecturer } from "../types/lecturer";
 
-export const findAllLecturers = async() => {
+export const findAllLecturers = async(page:number, limit:number) => {
     try {
-        const lecturers = await lecturer.find();
+        const skip = (page - 1) * limit;
+        const lecturers = await lecturer.find().skip(skip).limit(limit);
         return lecturers;
     } catch (error) {
         console.log(error);

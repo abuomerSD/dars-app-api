@@ -14,7 +14,9 @@ const asyncwrapper_1 = require("../utils/asyncwrapper");
 const lecturer_1 = require("../services/lecturer");
 const responseStatusMessages_1 = require("../utils/responseStatusMessages");
 exports.findAll = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    let lecturers = yield (0, lecturer_1.findAllLecturers)();
+    const page = req.query.page;
+    const limit = req.query.limit;
+    let lecturers = yield (0, lecturer_1.findAllLecturers)(page, limit);
     const name = req.query.name;
     if (name) {
         lecturers = yield (0, lecturer_1.findLecturerByName)(name);

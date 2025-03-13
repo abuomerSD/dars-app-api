@@ -26,7 +26,9 @@ exports.save = (0, asyncwrapper_1.asyncWrapper)((req, res, next) => __awaiter(vo
 }));
 // returns all lectures as json
 exports.findAll = (0, asyncwrapper_1.asyncWrapper)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    let lectures = yield (0, lecture_1.findAllLectures)();
+    const page = req.query.page;
+    const limit = req.query.limit;
+    let lectures = yield (0, lecture_1.findAllLectures)(page, limit);
     const name = req.query.name;
     console.log(name);
     if (name) {

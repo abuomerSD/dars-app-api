@@ -2,6 +2,7 @@
 
 # To Do 
 
+- user model
 - admin auth
 - swagger 
 - pagenation

@@ -17,7 +17,9 @@ export const save = asyncWrapper(async (req:Request, res:Response, next: NextFun
 
 // returns all lectures as json
 export const findAll = asyncWrapper(async (req:Request, res:Response, next: NextFunction) => {
-    let lectures = await findAllLectures();
+    const page:any = req.query.page;
+    const limit:any = req.query.limit;
+    let lectures = await findAllLectures(page, limit);
     const name: any = req.query.name;
     console.log(name);
     if(name) {

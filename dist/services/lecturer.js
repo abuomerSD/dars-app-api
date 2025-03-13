@@ -11,9 +11,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateLecturerById = exports.findLecturerByName = exports.deleteLectureById = exports.saveLecturer = exports.findLecturerById = exports.findAllLecturers = void 0;
 const lecturer_1 = require("../models/lecturer");
-const findAllLecturers = () => __awaiter(void 0, void 0, void 0, function* () {
+const findAllLecturers = (page, limit) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const lecturers = yield lecturer_1.lecturer.find();
+        const skip = (page - 1) * limit;
+        const lecturers = yield lecturer_1.lecturer.find().skip(skip).limit(limit);
         return lecturers;
     }
     catch (error) {

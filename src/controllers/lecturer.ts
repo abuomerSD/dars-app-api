@@ -5,7 +5,9 @@ import { Lecturer } from "../types/lecturer";
 import { SUCCESS_MESSAGE } from "../utils/responseStatusMessages";
 
 export const findAll = asyncWrapper(async (req:Request, res:Response) => {
-    let lecturers = await findAllLecturers();
+    const page:any = req.query.page;
+    const limit:any = req.query.limit;
+    let lecturers = await findAllLecturers(page, limit);
     const name: any = req.query.name;
     if(name) {
         lecturers = await findLecturerByName(name);
