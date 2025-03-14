@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.saveUser = void 0;
+exports.findUserById = exports.findAllUsers = exports.updateUserById = exports.deleteUserById = exports.saveUser = void 0;
 const user_1 = require("../models/user");
 const saveUser = (user) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -22,3 +22,43 @@ const saveUser = (user) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.saveUser = saveUser;
+const deleteUserById = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const deleted = yield user_1.userModel.findByIdAndDelete(id);
+        return deleted;
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+exports.deleteUserById = deleteUserById;
+const updateUserById = (id, newUser) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const updated = yield user_1.userModel.findByIdAndUpdate({ _id: id }, newUser);
+        return updated;
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+exports.updateUserById = updateUserById;
+const findAllUsers = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const users = yield user_1.userModel.find();
+        return users;
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+exports.findAllUsers = findAllUsers;
+const findUserById = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const user = yield user_1.userModel.findById(id);
+        return user;
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+exports.findUserById = findUserById;

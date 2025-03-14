@@ -8,3 +8,4 @@
 - delete image after delete document
 - notifications
 - cors
+- github actions
