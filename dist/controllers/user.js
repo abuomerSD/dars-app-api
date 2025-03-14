@@ -22,10 +22,34 @@ exports.save = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(void 0, 
     });
 }));
 exports.findAll = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const users = yield (0, user_1.findAllUsers)();
+    res.status(200).json({
+        status: responseStatusMessages_1.SUCCESS_MESSAGE,
+        data: users
+    });
 }));
 exports.updateById = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const newUser = req.body;
+    const { id } = req.params;
+    const updated = yield (0, user_1.updateUserById)(id, newUser);
+    res.status(200).json({
+        status: responseStatusMessages_1.SUCCESS_MESSAGE,
+        data: updated
+    });
 }));
 exports.deleteById = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const deleted = yield (0, user_1.deleteUserById)(id);
+    res.status(200).json({
+        status: responseStatusMessages_1.SUCCESS_MESSAGE,
+        data: deleted
+    });
 }));
 exports.findById = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const user = yield (0, user_1.findUserById)(id);
+    res.status(200).json({
+        status: responseStatusMessages_1.SUCCESS_MESSAGE,
+        data: user
+    });
 }));

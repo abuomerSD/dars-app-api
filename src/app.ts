@@ -14,9 +14,6 @@ const port = process.env.PORT || 3000;
 // json parser
 app.use(express.json());
 
-// error handler middleware
-app.use(errorHandler);
-
 // log request method and url
 if(process.env.NODE_ENV === 'development') {
     app.use(logRequestMethodAndUrl);
@@ -38,6 +35,9 @@ app.use(`/api/v${apiVersion}/lecturers`, lecturerRouter);
 
 // user routes
 app.use(`/api/v${apiVersion}/users`, usersRouter);
+
+// error handler middleware
+app.use(errorHandler);
 
 app.listen(port, ()=> {
     console.log(`Server is Listening on port: ${port}`);

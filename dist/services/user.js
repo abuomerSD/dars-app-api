@@ -8,11 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.findUserById = exports.findAllUsers = exports.updateUserById = exports.deleteUserById = exports.saveUser = void 0;
 const user_1 = require("../models/user");
+const bcrypt_1 = __importDefault(require("bcrypt"));
 const saveUser = (user) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        const hashedPassword = yield bcrypt_1.default.hash(user.password, 10);
+        user.password = hashedPassword;
         const u = new user_1.userModel(user);
         const saved = yield u.save();
         return saved;
@@ -34,6 +40,8 @@ const deleteUserById = (id) => __awaiter(void 0, void 0, void 0, function* () {
 exports.deleteUserById = deleteUserById;
 const updateUserById = (id, newUser) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        const hashedPassword = yield bcrypt_1.default.hash(newUser.password, 10);
+        newUser.password = hashedPassword;
         const updated = yield user_1.userModel.findByIdAndUpdate({ _id: id }, newUser);
         return updated;
     }
