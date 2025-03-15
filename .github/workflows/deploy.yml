@@ -1,9 +1,19 @@
-# name: Majales Al3lm App Api Auto Deployment
-# on:
-#   push:
-#     branches:
-#       - master
+name: Majales Al3lm App Api Auto Deployment
+on:
+  push:
+    branches:
+      - master
 
-# jobs:
-#   deploy:
-#     runs-on: ubuntu-latest
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+        - name: pull changes from github
+        run: git pull origin master
+        - name: install dependencies
+        run: npm install

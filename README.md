@@ -2,8 +2,7 @@
 
 # To Do 
 
-- user model
-- admin auth
+- user authentications
 - swagger 
 - delete image after delete document
 - notifications
