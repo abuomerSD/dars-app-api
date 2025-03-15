@@ -40,5 +40,5 @@ app.use(`/api/v${apiVersion}/users`, usersRouter);
 app.use(errorHandler);
 
 app.listen(port, ()=> {
-    console.log(`Server is Listening on port: ${port}`);
+    console.log(`Server is Listening on port: ${port}, Restart`);
 });

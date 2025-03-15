@@ -34,5 +34,5 @@ app.use(`/api/v${apiVersion}/users`, user_1.router);
 // error handler middleware
 app.use(errorHandler_1.errorHandler);
 app.listen(port, () => {
-    console.log(`Server is Listening on port: ${port}`);
+    console.log(`Server is Listening on port: ${port}, Restart`);
 });
