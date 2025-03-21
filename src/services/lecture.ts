@@ -58,7 +58,7 @@ export const findAllLectures =  async (page: number, limit: number) => {
 // find by lecturer name
 export const findLectureByLecturerName = async(name: String) => {
     try {
-        const lectures = await lecture.find({lecturer: {$regex : name}});
+        const lectures = await lecture.find({title: {$regex : name}});
         return lectures;
     } catch (error) {
         console.log(error);

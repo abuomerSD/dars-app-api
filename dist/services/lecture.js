@@ -72,7 +72,7 @@ exports.findAllLectures = findAllLectures;
 // find by lecturer name
 const findLectureByLecturerName = (name) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const lectures = yield lecture_1.lecture.find({ lecturer: { $regex: name } });
+        const lectures = yield lecture_1.lecture.find({ title: { $regex: name } });
         return lectures;
     }
     catch (error) {
