@@ -11,6 +11,7 @@ const lecture_1 = require("./routes/lecture");
 const lecturer_1 = require("./routes/lecturer");
 const user_1 = require("./routes/user");
 const errorHandler_1 = require("./middlewares/errorHandler");
+const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
 const port = process.env.PORT || 3000;
 // json parser
@@ -20,6 +21,8 @@ if (process.env.NODE_ENV === 'development') {
     app.use(logger_1.logRequestMethodAndUrl);
     console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
 }
+// cors
+app.use((0, cors_1.default)());
 // static files
 app.use(express_1.default.static('uploads'));
 // connect database
