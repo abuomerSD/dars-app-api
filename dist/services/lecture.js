@@ -37,7 +37,7 @@ exports.updateLectureById = updateLectureById;
 // delete lecture
 const deleteLectureById = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const deleted = yield lecture_1.lecture.findOneAndDelete(id);
+        const deleted = yield lecture_1.lecture.findByIdAndDelete(id);
         // console.log(deleted);
         return deleted;
     }

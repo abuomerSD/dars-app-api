@@ -8,4 +8,3 @@
 - notifications
 - github actions
 - fix cors 
-- fix delete lecture by id 

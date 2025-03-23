@@ -26,7 +26,7 @@ export const updateLectureById = async (id: String, newLecture: Lecture) => {
 // delete lecture
 export const deleteLectureById = async (id: String) => {
     try {
-        const deleted = await lecture.findOneAndDelete(id);
+        const deleted = await lecture.findByIdAndDelete(id);
         // console.log(deleted);
         return deleted;
     } catch (error) {
