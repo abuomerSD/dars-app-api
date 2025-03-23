@@ -6,5 +6,6 @@
 - swagger 
 - delete image after delete document
 - notifications
-- cors
 - github actions
+- fix cors 
+- fix delete lecture by id 
