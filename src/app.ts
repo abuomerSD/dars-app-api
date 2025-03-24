@@ -15,6 +15,9 @@ const port = process.env.PORT || 3000;
 // json parser
 app.use(express.json());
 
+// body parser
+app.use(express.urlencoded({ extended: false }));    
+
 // log request method and url
 if(process.env.NODE_ENV === 'development') {
     app.use(logRequestMethodAndUrl);
