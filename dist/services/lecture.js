@@ -8,9 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.findLectureByLecturerName = exports.findAllLectures = exports.findLectureById = exports.deleteLectureById = exports.updateLectureById = exports.saveLecture = void 0;
 const lecture_1 = require("../models/lecture");
+const fs_1 = __importDefault(require("fs"));
 // save lecture to database
 const saveLecture = (l) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -38,7 +42,8 @@ exports.updateLectureById = updateLectureById;
 const deleteLectureById = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const deleted = yield lecture_1.lecture.findByIdAndDelete(id);
-        // console.log(deleted);
+        const imgName = deleted === null || deleted === void 0 ? void 0 : deleted.image;
+        fs_1.default.unlinkSync(`./uploads${imgName}`);
         return deleted;
     }
     catch (error) {

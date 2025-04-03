@@ -1,5 +1,6 @@
 import { lecture } from "../models/lecture";
 import { Lecture } from "../types/lecture";
+import fs from "fs";
 
 // save lecture to database
 export const saveLecture =  async (l: Lecture) => {
@@ -27,7 +28,8 @@ export const updateLectureById = async (id: String, newLecture: Lecture) => {
 export const deleteLectureById = async (id: String) => {
     try {
         const deleted = await lecture.findByIdAndDelete(id);
-        // console.log(deleted);
+        const imgName: any = deleted?.image;
+        fs.unlinkSync(`./uploads${imgName}`);
         return deleted;
     } catch (error) {
         console.log(error);

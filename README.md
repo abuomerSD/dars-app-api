@@ -2,9 +2,8 @@
 
 # To Do 
 
-- user authentications
+- user authentications2
 - swagger 
 - delete image after delete document
 - notifications
 - github actions
-- fix cors 
