@@ -1,5 +1,6 @@
 import { lecturer } from "../models/lecturer"
 import { Lecturer } from "../types/lecturer";
+import fs from 'fs';
 
 export const findAllLecturers = async(page:number, limit:number) => {
     try {
@@ -32,6 +33,8 @@ export const saveLecturer = async (lec: Lecturer) => {
 export const deleteLectureById = async (id:String) => {
     try {
         const deleted = await lecturer.findByIdAndDelete(id);
+        const imgName: any = deleted?.image;
+        fs.unlinkSync(`./uploads${imgName}`);
         return deleted;
     } catch (error) {
         console.log(error);
