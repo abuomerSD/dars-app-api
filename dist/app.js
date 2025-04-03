@@ -12,6 +12,7 @@ const lecturer_1 = require("./routes/lecturer");
 const user_1 = require("./routes/user");
 const errorHandler_1 = require("./middlewares/errorHandler");
 const cors_1 = __importDefault(require("cors"));
+const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const app = (0, express_1.default)();
 const port = process.env.PORT || 3000;
 // json parser
@@ -25,6 +26,8 @@ if (process.env.NODE_ENV === 'development') {
 }
 // cors
 app.use((0, cors_1.default)());
+// cookie parser
+app.use((0, cookie_parser_1.default)());
 // static files
 app.use(express_1.default.static('uploads'));
 // connect database

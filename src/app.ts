@@ -7,6 +7,7 @@ import { router as lecturerRouter } from './routes/lecturer';
 import { router as usersRouter } from './routes/user';
 import { errorHandler } from './middlewares/errorHandler';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 
 const app: Express = express();
 
@@ -25,6 +26,9 @@ if(process.env.NODE_ENV === 'development') {
 }
 // cors
 app.use(cors());
+
+// cookie parser
+app.use(cookieParser());
 
 // static files
 app.use(express.static('uploads'));

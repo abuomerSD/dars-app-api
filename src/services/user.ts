@@ -2,6 +2,8 @@ import { userModel } from "../models/user";
 import { User } from "../types/user";
 import bcrypt from 'bcrypt';
 
+
+
 export const saveUser = async (user: User) => {
     try {
         const hashedPassword = await bcrypt.hash(user.password, 10);

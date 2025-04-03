@@ -1,8 +1,11 @@
 import express from 'express';
-import  {save, deleteById, findAll, findById, updateById} from '../controllers/user';
+import  {save, deleteById, findAll, findById, updateById, login} from '../controllers/user';
+import { adminAuth } from '../middlewares/adminAuth';
 
 export const router = express.Router();
 
-router.route('/').get(findAll).post(save);
+router.route('/').get(adminAuth, findAll).post(adminAuth, save);
 
-router.route('/:id').get(findById).put(updateById).delete(deleteById);
+router.route('/login').post(login);
+
+router.route('/:id').get(adminAuth, findById).put(adminAuth, updateById).delete(adminAuth, deleteById);

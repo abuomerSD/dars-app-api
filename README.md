@@ -2,8 +2,7 @@
 
 # To Do 
 
-- user authentications2
+- user authentications
 - swagger 
-- delete image after delete document
 - notifications
 - github actions
