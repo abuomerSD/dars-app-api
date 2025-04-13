@@ -93,22 +93,22 @@ export const createToken = async (user: User) => {
 //     }
 //  } 
 
- export const login = asyncWrapper(async (req:Request, res: Response) => {
+export const login = asyncWrapper(async (req:Request, res: Response) => {
     const { username, password } = req.body;
     // finding the user on the database
     let user = await userModel.findOne({username});
- 
+
     // if (!user) {
     //    user = await userModel.findOne({email: username});
     // }
- 
+
     if (!user) {
-       res.status(404).json({
+        res.status(404).json({
         status: FAIL_MESSAGE,
         message: 'user not found',
-       });
+    });
     }
- 
+
     if (user) {
         // comparing the entered password with the hashed password on the database
         if(user.password) {
@@ -134,9 +134,9 @@ export const createToken = async (user: User) => {
         }
         
     }
- });
+});
 
- export const logout = asyncWrapper( async (req: Request, res: Response) => {
+export const logout = asyncWrapper( async (req: Request, res: Response) => {
     // removing jwt token from browser
     res.cookie('jwt', '');
     // redirecting to index page
@@ -144,4 +144,4 @@ export const createToken = async (user: User) => {
         status: SUCCESS_MESSAGE,
         message: 'user logged out successfully',
     });
- });
+});
