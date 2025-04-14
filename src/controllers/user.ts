@@ -103,7 +103,7 @@ export const login = asyncWrapper(async (req:Request, res: Response) => {
     // }
 
     if (!user) {
-        res.status(404).json({
+        res.status(200).json({
         status: FAIL_MESSAGE,
         message: 'user not found',
     });
@@ -125,7 +125,7 @@ export const login = asyncWrapper(async (req:Request, res: Response) => {
                 res.status(200).json({status: SUCCESS_MESSAGE, token});
             }
             else {
-            res.status(400).json({
+            res.status(200).json({
                 status: FAIL_MESSAGE,
                 message: 'password is not correct, please try again',
             });

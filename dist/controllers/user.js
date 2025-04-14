@@ -102,7 +102,7 @@ exports.login = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(void 0,
     //    user = await userModel.findOne({email: username});
     // }
     if (!user) {
-        res.status(404).json({
+        res.status(200).json({
             status: responseStatusMessages_1.FAIL_MESSAGE,
             message: 'user not found',
         });
@@ -123,7 +123,7 @@ exports.login = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(void 0,
                 res.status(200).json({ status: responseStatusMessages_1.SUCCESS_MESSAGE, token });
             }
             else {
-                res.status(400).json({
+                res.status(200).json({
                     status: responseStatusMessages_1.FAIL_MESSAGE,
                     message: 'password is not correct, please try again',
                 });
