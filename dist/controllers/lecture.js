@@ -17,6 +17,7 @@ const responseStatusMessages_1 = require("../utils/responseStatusMessages");
 exports.save = (0, asyncwrapper_1.asyncWrapper)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     const lecture = req.body;
+    console.log('req file', req.file);
     lecture.image = '/images/' + ((_a = req.file) === null || _a === void 0 ? void 0 : _a.filename);
     const saved = yield (0, lecture_1.saveLecture)(lecture);
     res.status(201).json({
