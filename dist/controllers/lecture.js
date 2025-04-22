@@ -42,7 +42,8 @@ exports.findAll = (0, asyncwrapper_1.asyncWrapper)((req, res, next) => __awaiter
     else {
         res.status(200).json({
             status: responseStatusMessages_1.SUCCESS_MESSAGE,
-            data: (lectures === null || lectures === void 0 ? void 0 : lectures.lectures) || []
+            data: (lectures === null || lectures === void 0 ? void 0 : lectures.lectures) || [],
+            tot: (lectures === null || lectures === void 0 ? void 0 : lectures.tot) || 0
         });
     }
 }));

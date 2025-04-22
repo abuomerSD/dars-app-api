@@ -32,7 +32,8 @@ export const findAll = asyncWrapper(async (req:Request, res:Response, next: Next
     } else {
         res.status(200).json({
             status: SUCCESS_MESSAGE,
-            data: lectures?.lectures || []
+            data: lectures?.lectures || [],
+            tot: lectures?.tot || 0
         });
     }
     

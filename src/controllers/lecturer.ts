@@ -18,7 +18,8 @@ export const findAll = asyncWrapper(async (req:Request, res:Response) => {
     } else {
         res.status(200).json({
             status: SUCCESS_MESSAGE,
-            data: lecturers?.lecturers || []
+            data: lecturers?.lecturers || [],
+            tot: lecturers?.tot || 0
         });
     }
     
