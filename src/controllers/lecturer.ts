@@ -10,15 +10,15 @@ export const findAll = asyncWrapper(async (req:Request, res:Response) => {
     let lecturers = await findAllLecturers(page, limit);
     const name: any = req.query.name;
     if(name) {
-        lecturers = await findLecturerByName(name);
+        const lecturers1 = await findLecturerByName(name);
         return res.status(200).json({
             status: SUCCESS_MESSAGE,
-            data: lecturers
+            data: lecturers1
         });
     } else {
         res.status(200).json({
             status: SUCCESS_MESSAGE,
-            data: lecturers
+            data: lecturers?.lecturers || []
         });
     }
     

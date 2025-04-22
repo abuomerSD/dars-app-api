@@ -65,9 +65,11 @@ exports.findLectureById = findLectureById;
 // return array of lectures 
 const findAllLectures = (page, limit) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        const allLectures = yield lecture_1.lecture.find({});
+        const tot = allLectures.length;
         const skip = (page - 1) * limit;
         const lectures = yield lecture_1.lecture.find().skip(skip).limit(limit);
-        return lectures;
+        return { lectures, tot };
     }
     catch (error) {
         console.log(error);

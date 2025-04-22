@@ -49,9 +49,11 @@ export const findLectureById = async (id: String) => {
 // return array of lectures 
 export const findAllLectures =  async (page: number, limit: number) => {
     try {
+        const allLectures = await lecture.find({})
+        const tot = allLectures.length
         const skip = (page - 1) * limit;
         const lectures = await lecture.find().skip(skip).limit(limit);
-        return lectures;
+        return {lectures, tot};
     } catch (error) {
         console.log(error); 
     }

@@ -4,9 +4,11 @@ import fs from 'fs';
 
 export const findAllLecturers = async(page:number, limit:number) => {
     try {
+        const allLectures = await lecturer.find({})
+        const tot = allLectures.length
         const skip = (page - 1) * limit;
         const lecturers = await lecturer.find().skip(skip).limit(limit);
-        return lecturers;
+        return {lecturers, tot};
     } catch (error) {
         console.log(error);
     }

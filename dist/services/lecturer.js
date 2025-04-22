@@ -17,9 +17,11 @@ const lecturer_1 = require("../models/lecturer");
 const fs_1 = __importDefault(require("fs"));
 const findAllLecturers = (page, limit) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        const allLectures = yield lecturer_1.lecturer.find({});
+        const tot = allLectures.length;
         const skip = (page - 1) * limit;
         const lecturers = yield lecturer_1.lecturer.find().skip(skip).limit(limit);
-        return lecturers;
+        return { lecturers, tot };
     }
     catch (error) {
         console.log(error);

@@ -19,16 +19,16 @@ exports.findAll = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(void 
     let lecturers = yield (0, lecturer_1.findAllLecturers)(page, limit);
     const name = req.query.name;
     if (name) {
-        lecturers = yield (0, lecturer_1.findLecturerByName)(name);
+        const lecturers1 = yield (0, lecturer_1.findLecturerByName)(name);
         return res.status(200).json({
             status: responseStatusMessages_1.SUCCESS_MESSAGE,
-            data: lecturers
+            data: lecturers1
         });
     }
     else {
         res.status(200).json({
             status: responseStatusMessages_1.SUCCESS_MESSAGE,
-            data: lecturers
+            data: (lecturers === null || lecturers === void 0 ? void 0 : lecturers.lecturers) || []
         });
     }
 }));

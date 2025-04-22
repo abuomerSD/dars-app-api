@@ -33,16 +33,16 @@ exports.findAll = (0, asyncwrapper_1.asyncWrapper)((req, res, next) => __awaiter
     const name = req.query.name;
     console.log(name);
     if (name) {
-        lectures = yield (0, lecture_1.findLectureByLecturerName)(name);
+        const lectures1 = yield (0, lecture_1.findLectureByLecturerName)(name);
         return res.status(200).json({
             status: responseStatusMessages_1.SUCCESS_MESSAGE,
-            data: lectures
+            data: lectures1
         });
     }
     else {
         res.status(200).json({
             status: responseStatusMessages_1.SUCCESS_MESSAGE,
-            data: lectures
+            data: (lectures === null || lectures === void 0 ? void 0 : lectures.lectures) || []
         });
     }
 }));
