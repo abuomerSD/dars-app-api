@@ -68,7 +68,7 @@ const findAllLectures = (page, limit) => __awaiter(void 0, void 0, void 0, funct
         const allLectures = yield lecture_1.lecture.find({});
         const tot = allLectures.length;
         const skip = (page - 1) * limit;
-        const lectures = yield lecture_1.lecture.find().skip(skip).limit(limit).sort({ '_id': -1 });
+        const lectures = yield lecture_1.lecture.find().skip(skip).limit(limit).sort({ 'createdAt': -1 });
         return { lectures, tot };
     }
     catch (error) {
