@@ -7,7 +7,7 @@ export const findAllLecturers = async(page:number, limit:number) => {
         const allLectures = await lecturer.find({})
         const tot = allLectures.length
         const skip = (page - 1) * limit;
-        const lecturers = await lecturer.find().skip(skip).limit(limit);
+        const lecturers = await lecturer.find().skip(skip).limit(limit).sort({'_id': -1});
         return {lecturers, tot};
     } catch (error) {
         console.log(error);
