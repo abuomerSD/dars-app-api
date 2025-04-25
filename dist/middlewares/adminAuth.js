@@ -40,6 +40,7 @@ function adminAuth(req, res, next) {
             });
             return;
         }
+        console.log('decoded', decoded);
         const user = yield user_1.userModel.findById(decoded.id);
         if (!user) {
             res.status(403).json({

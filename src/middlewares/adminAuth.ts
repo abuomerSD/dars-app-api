@@ -33,6 +33,7 @@ export function adminAuth(req: Request, res: Response, next: NextFunction): void
       return;
     }
 
+    console.log('decoded', decoded)
     const user = await userModel.findById(decoded.id);
     if (!user) {
       res.status(403).json({
