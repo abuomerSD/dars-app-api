@@ -9,7 +9,7 @@ const jwtSecret : any = process.env.JWT_SECRECT;
 
 export function adminAuth(req: Request, res: Response, next: NextFunction) {
 
-    const token: string | null = req.cookies.jwt;
+    const token: string | null = req.body.token;
     if (token) {
         jwt.verify(token, jwtSecret, async (err: any, decodedToken: any) => {
             if (err) {

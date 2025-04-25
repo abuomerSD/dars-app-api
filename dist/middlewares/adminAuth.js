@@ -20,7 +20,7 @@ const responseStatusMessages_1 = require("../utils/responseStatusMessages");
 dotenv_1.default.config();
 const jwtSecret = process.env.JWT_SECRECT;
 function adminAuth(req, res, next) {
-    const token = req.cookies.jwt;
+    const token = req.body.token;
     if (token) {
         jsonwebtoken_1.default.verify(token, jwtSecret, (err, decodedToken) => __awaiter(this, void 0, void 0, function* () {
             if (err) {
