@@ -21,37 +21,66 @@ dotenv_1.default.config();
 const jwtSecret = process.env.JWT_SECRECT;
 function adminAuth(req, res, next) {
     const authHeader = req.headers.authorization;
-    const token = authHeader && authHeader.split(' ')[1]; // Bearer <token>
-    if (token) {
-        jsonwebtoken_1.default.verify(token, jwtSecret, (err, decodedToken) => __awaiter(this, void 0, void 0, function* () {
-            if (err) {
-                console.error('JWT Error:', err.message);
-                return res.status(403).json({
-                    status: responseStatusMessages_1.FAIL_MESSAGE,
-                    message: 'Token verification failed',
-                });
-            }
-            const user = yield user_1.userModel.findById(decodedToken.id);
-            res.locals.user = user;
-            if (user) {
-                next();
-            }
-            else {
-                return res.status(403).json({
-                    status: responseStatusMessages_1.FAIL_MESSAGE,
-                    message: 'This route is only for admins',
-                });
-            }
-        }));
-    }
-    else {
-        return res.status(401).json({
+    const token = authHeader && authHeader.split(' ')[1];
+    if (!token) {
+        res.status(401).json({
             status: responseStatusMessages_1.FAIL_MESSAGE,
             message: 'Please login first',
         });
+        return;
     }
+    jsonwebtoken_1.default.verify(token, jwtSecret, (err, decodedToken) => __awaiter(this, void 0, void 0, function* () {
+        if (err) {
+            console.error('JWT Error:', err.message);
+            res.status(403).json({
+                status: responseStatusMessages_1.FAIL_MESSAGE,
+                message: 'Token verification failed',
+            });
+            return;
+        }
+        const user = yield user_1.userModel.findById(decodedToken.id);
+        if (!user) {
+            res.status(403).json({
+                status: responseStatusMessages_1.FAIL_MESSAGE,
+                message: 'This route is only for admins',
+            });
+            return;
+        }
+        res.locals.user = user;
+        next(); // ✅ فقط بعد التأكد
+    }));
 }
 exports.adminAuth = adminAuth;
+// export function adminAuth(req: Request, res: Response, next: NextFunction) {
+//   const authHeader = req.headers.authorization;
+//   const token = authHeader && authHeader.split(' ')[1]; // Bearer <token>
+//   if (token) {
+//         jwt.verify(token, jwtSecret, async (err: any, decodedToken: any) => {
+//           if (err) {
+//             console.error('JWT Error:', err.message);
+//             return res.status(403).json({
+//               status: FAIL_MESSAGE,
+//               message: 'Token verification failed',
+//             });
+//           }
+//           const user = await userModel.findById(decodedToken.id);
+//           res.locals.user = user;
+//           if (user) {
+//             next();
+//           } else {
+//             return res.status(403).json({
+//               status: FAIL_MESSAGE,
+//               message: 'This route is only for admins',
+//             });
+//           }
+//         });
+//       } else {
+//         return res.status(401).json({
+//           status: FAIL_MESSAGE,
+//           message: 'Please login first',
+//         });
+//       }
+// }
 // export function adminAuth(req: Request, res: Response, next: NextFunction) {
 //     const token: string | null = req.body.token;
 //     console.log('body',req.body)
