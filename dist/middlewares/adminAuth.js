@@ -29,7 +29,9 @@ function adminAuth(req, res, next) {
         });
         return;
     }
+    let decoded = null;
     jsonwebtoken_1.default.verify(token, jwtSecret, (err, decodedToken) => __awaiter(this, void 0, void 0, function* () {
+        decoded = decodedToken;
         if (err) {
             console.error('JWT Error:', err.message);
             res.status(403).json({
@@ -38,7 +40,7 @@ function adminAuth(req, res, next) {
             });
             return;
         }
-        const user = yield user_1.userModel.findById(decodedToken.id);
+        const user = yield user_1.userModel.findById(decoded.id);
         if (!user) {
             res.status(403).json({
                 status: responseStatusMessages_1.FAIL_MESSAGE,

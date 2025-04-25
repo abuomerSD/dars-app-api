@@ -20,7 +20,10 @@ export function adminAuth(req: Request, res: Response, next: NextFunction): void
     return;
   }
 
+  let decoded = null
+
   jwt.verify(token, jwtSecret, async (err: any, decodedToken: any) => {
+    decoded = decodedToken;
     if (err) {
       console.error('JWT Error:', err.message);
       res.status(403).json({
@@ -30,7 +33,7 @@ export function adminAuth(req: Request, res: Response, next: NextFunction): void
       return;
     }
 
-    const user = await userModel.findById(decodedToken.id);
+    const user = await userModel.findById(decoded.id);
     if (!user) {
       res.status(403).json({
         status: FAIL_MESSAGE,
