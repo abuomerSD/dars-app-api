@@ -41,7 +41,8 @@ function adminAuth(req, res, next) {
             return;
         }
         console.log('decoded', decoded);
-        const user = yield user_1.userModel.findOne({ _id: decoded.id });
+        const user = yield user_1.userModel.findOne({ _id: decoded._id });
+        console.log('user', user);
         if (!user) {
             res.status(403).json({
                 status: responseStatusMessages_1.FAIL_MESSAGE,
