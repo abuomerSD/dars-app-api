@@ -34,7 +34,7 @@ export function adminAuth(req: Request, res: Response, next: NextFunction): void
     }
 
     console.log('decoded', decoded)
-    const user = await userModel.findOne({_id: decoded._id})
+    const user = await userModel.findOne({ _id: decoded.id });
     console.log('user', user)
     if (!user) {
       res.status(403).json({
