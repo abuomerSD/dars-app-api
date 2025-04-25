@@ -34,7 +34,7 @@ export function adminAuth(req: Request, res: Response, next: NextFunction): void
     }
 
     console.log('decoded', decoded)
-    const user = await userModel.findById(decoded.id);
+    const user = await userModel.findOne({_id: decoded.id})
     if (!user) {
       res.status(403).json({
         status: FAIL_MESSAGE,
