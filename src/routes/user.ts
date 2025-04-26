@@ -4,7 +4,7 @@ import { adminAuth } from '../middlewares/adminAuth';
 
 export const router = express.Router();
 
-router.route('/').get(findAll).post(save);
+router.route('/').get(findAll).post(adminAuth, save);
 
 router.route('/login').post(login);
 
