@@ -2,7 +2,6 @@
 
 # To Do 
 
-- user authentications
 - swagger 
 - notifications
 - github actions

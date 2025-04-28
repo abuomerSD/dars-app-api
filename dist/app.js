@@ -13,6 +13,12 @@ const user_1 = require("./routes/user");
 const errorHandler_1 = require("./middlewares/errorHandler");
 const cors_1 = __importDefault(require("cors"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
+// firebase admin
+const admin = require('firebase-admin');
+const serviceAccount = require('./firebase-service-account.json');
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+});
 const app = (0, express_1.default)();
 const port = process.env.PORT || 3000;
 // json parser

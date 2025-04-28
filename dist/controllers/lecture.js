@@ -9,10 +9,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateById = exports.deleteById = exports.findById = exports.findAll = exports.save = void 0;
+exports.sendNotificationToAll = exports.updateById = exports.deleteById = exports.findById = exports.findAll = exports.save = void 0;
 const asyncwrapper_1 = require("../utils/asyncwrapper");
 const lecture_1 = require("../services/lecture");
 const responseStatusMessages_1 = require("../utils/responseStatusMessages");
+const admin = require('firebase-admin');
 // save lecture to database
 exports.save = (0, asyncwrapper_1.asyncWrapper)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
@@ -77,4 +78,21 @@ exports.updateById = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(vo
         status: responseStatusMessages_1.SUCCESS_MESSAGE,
         data: updated,
     });
+}));
+exports.sendNotificationToAll = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { title, body } = req.body;
+    const message = {
+        notification: {
+            title: title,
+            body: body,
+        },
+        topic: 'all',
+    };
+    try {
+        const response = yield admin.messaging().send(message);
+        console.log('Successfully sent message to topic:', response);
+    }
+    catch (error) {
+        console.error('Error sending message to topic:', error);
+    }
 }));

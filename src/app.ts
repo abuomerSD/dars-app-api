@@ -9,6 +9,14 @@ import { errorHandler } from './middlewares/errorHandler';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
+// firebase admin
+const admin = require('firebase-admin');
+const serviceAccount = require('./firebase-service-account.json');
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+  });
+
 const app: Express = express();
 
 const port = process.env.PORT || 3000;

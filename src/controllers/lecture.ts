@@ -3,6 +3,8 @@ import { asyncWrapper } from "../utils/asyncwrapper";
 import { Lecture } from "../types/lecture";
 import { deleteLectureById, findAllLectures, findLectureById, findLectureByLecturerName, saveLecture, updateLectureById } from '../services/lecture';
 import { SUCCESS_MESSAGE } from "../utils/responseStatusMessages";
+const admin = require('firebase-admin');
+
 
 // save lecture to database
 export const save = asyncWrapper(async (req:Request, res:Response, next: NextFunction) => {
@@ -71,4 +73,22 @@ export const updateById = asyncWrapper(async (req:Request, res:Response) => {
         status: SUCCESS_MESSAGE,
         data: updated,
     });
+});
+
+export const sendNotificationToAll = asyncWrapper(async (req:Request, res:Response) => {
+    const { title, body } = req.body;
+    const message = {
+        notification: {
+          title: title,
+          body: body,
+        },
+        topic: 'all',
+      };
+
+      try {
+        const response = await admin.messaging().send(message);
+        console.log('Successfully sent message to topic:', response);
+      } catch (error) {
+        console.error('Error sending message to topic:', error);
+      }
 });
