@@ -18,6 +18,10 @@ const lectureSchema = new Schema({
     location: String,
     image: String,
     description: String,
+    NotificationSent: {
+        type: Boolean,
+        default: false, // أول ما تنشأ المحاضرة، لم يتم إرسال إشعار
+    },
 }, {
     timestamps: true,
     versionKey: false,
