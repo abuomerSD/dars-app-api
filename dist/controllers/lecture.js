@@ -14,6 +14,7 @@ const asyncwrapper_1 = require("../utils/asyncwrapper");
 const lecture_1 = require("../services/lecture");
 const responseStatusMessages_1 = require("../utils/responseStatusMessages");
 const admin = require('firebase-admin');
+const lecture_2 = require("../models/lecture");
 // save lecture to database
 exports.save = (0, asyncwrapper_1.asyncWrapper)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
@@ -80,7 +81,10 @@ exports.updateById = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(vo
     });
 }));
 exports.sendNotificationToAll = (0, asyncwrapper_1.asyncWrapper)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { title, body } = req.body;
+    const { title, body, id } = req.body;
+    if (!id || !title || !body) {
+        return res.status(400).json({ message: "id, title, and body are required." });
+    }
     const message = {
         notification: {
             title: title,
@@ -91,8 +95,12 @@ exports.sendNotificationToAll = (0, asyncwrapper_1.asyncWrapper)((req, res) => _
     try {
         const response = yield admin.messaging().send(message);
         console.log('Successfully sent message to topic:', response);
+        // بعد الإرسال، حدّث المحاضرة واجعل NotificationSent = true
+        yield lecture_2.lecture.updateOne({ _id: id }, { NotificationSent: true });
+        return res.status(200).json({ status: responseStatusMessages_1.SUCCESS_MESSAGE, message: "Notification sent and lecture updated successfully." });
     }
     catch (error) {
         console.error('Error sending message to topic:', error);
+        return res.status(500).json({ message: "Failed to send notification.", error });
     }
 }));

@@ -4,6 +4,7 @@ import { Lecture } from "../types/lecture";
 import { deleteLectureById, findAllLectures, findLectureById, findLectureByLecturerName, saveLecture, updateLectureById } from '../services/lecture';
 import { SUCCESS_MESSAGE } from "../utils/responseStatusMessages";
 const admin = require('firebase-admin');
+import { lecture } from "../models/lecture";
 
 
 // save lecture to database
@@ -75,20 +76,32 @@ export const updateById = asyncWrapper(async (req:Request, res:Response) => {
     });
 });
 
-export const sendNotificationToAll = asyncWrapper(async (req:Request, res:Response) => {
-    const { title, body } = req.body;
+
+export const sendNotificationToAll = asyncWrapper(async (req: Request, res: Response) => {
+    const { title, body, id } = req.body;
+
+    if (!id || !title || !body) {
+        return res.status(400).json({ message: "id, title, and body are required." });
+    }
+
     const message = {
         notification: {
-          title: title,
-          body: body,
+            title: title,
+            body: body,
         },
         topic: 'all',
-      };
+    };
 
-      try {
+    try {
         const response = await admin.messaging().send(message);
         console.log('Successfully sent message to topic:', response);
-      } catch (error) {
+
+        // بعد الإرسال، حدّث المحاضرة واجعل NotificationSent = true
+        await lecture.updateOne({ _id: id }, { NotificationSent: true });
+
+        return res.status(200).json({ status: SUCCESS_MESSAGE ,message: "Notification sent and lecture updated successfully." });
+    } catch (error) {
         console.error('Error sending message to topic:', error);
-      }
+        return res.status(500).json({ message: "Failed to send notification.", error });
+    }
 });
